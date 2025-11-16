@@ -23,7 +23,7 @@ function App() {
         <h2 className="text-2xl font-bold mb-4">Vehículos</h2>
         <ul className="list-disc list-inside bg-red-200 p-4 rounded">
           {vehiculos.map((vehiculo) => (
-            <li >{JSON.stringify(vehiculo)}</li>
+            <li key={vehiculo.id}>{JSON.stringify(vehiculo)}</li>
           ))}
         </ul>
       </div>
@@ -32,7 +32,7 @@ function App() {
         <h2 className="text-2xl font-bold mb-4">Accesorios de Vehículos</h2>
         <ul className="list-disc list-inside bg-blue-200 p-4 rounded">
           {accesorios.map((accesorio) => (
-            <li >{ JSON.stringify(accesorio)}</li>
+            <li key={accesorio.id}>{ JSON.stringify(accesorio)}</li>
           ))}
         </ul>
       </div>
