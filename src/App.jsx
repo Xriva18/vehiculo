@@ -1,30 +1,41 @@
 import { useState, useEffect } from 'react'
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
+import { getVehiculos, getAccesoriosVehiculo } from './services/vehiculoService';
 
 function App() {
 
   const [vehiculos, setVehiculos] = useState([]);
-  
-  async function getVehiculos() {
-    const { data } = await supabase.from("tb_vehiculo").select();
-    setVehiculos(data);
-  }
+  const [accesorios, setAccesorios] = useState([]);
   
   useEffect(() => {
-    getVehiculos();
+    async function cargarDatos() {
+      const vehiculosData = await getVehiculos();
+      const accesoriosData = await getAccesoriosVehiculo();
+      setVehiculos(vehiculosData);
+      setAccesorios(accesoriosData);
+    }
+    cargarDatos();
   }, []);
   
 
   return (
     <>
+      <div className="p-4">
+        <h2 className="text-2xl font-bold mb-4">Vehículos</h2>
+        <ul className="list-disc list-inside bg-red-200 p-4 rounded">
+          {vehiculos.map((vehiculo) => (
+            <li >{JSON.stringify(vehiculo)}</li>
+          ))}
+        </ul>
+      </div>
       
-      <ul className="list-disc list-inside bg-red-200">
-      {vehiculos.map((vehiculo) => (
-        <li key={vehiculo.id || vehiculo.name}>{vehiculo.name || vehiculo.marca || JSON.stringify(vehiculo)}</li>
-      ))}
-    </ul>
+      <div className="p-4">
+        <h2 className="text-2xl font-bold mb-4">Accesorios de Vehículos</h2>
+        <ul className="list-disc list-inside bg-blue-200 p-4 rounded">
+          {accesorios.map((accesorio) => (
+            <li >{ JSON.stringify(accesorio)}</li>
+          ))}
+        </ul>
+      </div>
     </>
   )
 }
