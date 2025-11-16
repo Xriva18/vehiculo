@@ -78,6 +78,9 @@ function Inventario() {
                 {vehiculo.marca} {vehiculo.modelo}
               </h3>
               <div className="space-y-1 text-sm text-gray-600">
+                <p><span className="font-semibold">Número de Serie:</span> {vehiculo.numero_serie_vehiculo}</p>
+                <p><span className="font-semibold">Marca:</span> {vehiculo.marca}</p>
+                <p><span className="font-semibold">Modelo:</span> {vehiculo.modelo}</p>
                 <p><span className="font-semibold">Año:</span> {vehiculo.anio}</p>
                 <p><span className="font-semibold">Color:</span> {vehiculo.color || 'N/A'}</p>
                 <p><span className="font-semibold">Kilometraje:</span> {vehiculo.kilometraje ? `${vehiculo.kilometraje.toLocaleString()} km` : 'N/A'}</p>
